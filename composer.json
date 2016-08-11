@@ -1,0 +1,40 @@
+{
+    "name": "comindware/tracker-symfony-bundle",
+    "description": "A Symfony bundle for working with Comindware Tracker",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "keywords": [
+        "comindware",
+        "symfony"
+    ],
+    "homepage": "https://github.com/comindware/ComindwareTrackerBundle",
+    "authors": [
+        {
+            "name": "Михаил Красильников",
+            "email": "m.krasilnikov@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "symfony/framework-bundle": "~2.3 || ~3.0",
+        "comindware/tracker-php-api": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "php-http/mock-client": "^0.3",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Comindware\\ComindwareTrackerBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Comindware\\ComindwareTrackerBundle\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
