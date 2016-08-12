@@ -8,7 +8,7 @@
 namespace Comindware\ComindwareTrackerBundle\DependencyInjection;
 
 use Comindware\ComindwareTrackerBundle\DependencyInjection\Factory\ConnectionFactory;
-use Comindware\Tracker\API\Client;
+use Comindware\Tracker\API\Api;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -74,7 +74,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
                 $messageFactory = new Reference($config['http']['message_factory']);
             }
 
-            $service = new Definition(Client::class, [$url, $token, $httpClient, $messageFactory]);
+            $service = new Definition(Api::class, [$url, $token, $httpClient, $messageFactory]);
             $service->setFactory([ConnectionFactory::class, 'create']);
             $container->setDefinition('comindware.tracker.' . $name, $service);
         }
