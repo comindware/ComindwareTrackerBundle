@@ -22,9 +22,10 @@
         "comindware/tracker-php-api": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
         "php-http/mock-client": "^0.3",
         "php-http/socket-client": "^1.2",
+        "phpunit/phpunit": "^4.8",
+        "puli/composer-plugin": "1.0.0-beta8",
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
