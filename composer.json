@@ -7,8 +7,6 @@
         "comindware",
         "symfony"
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "homepage": "https://github.com/comindware/ComindwareTrackerBundle",
     "authors": [
         {
@@ -22,6 +20,7 @@
         "comindware/tracker-php-api": "dev-master"
     },
     "require-dev": {
+        "php-http/message": "^1.0",
         "php-http/mock-client": "^0.3",
         "php-http/socket-client": "^1.2",
         "phpunit/phpunit": "^4.8",
