@@ -17,6 +17,9 @@ use Comindware\Tracker\API\Api;
  */
 class ConnectionFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Test autodetecting all dependencies.
+     */
     public function testAutodetectAll()
     {
         $connection = ConnectionFactory::create('http://example.com/', 'my.token');
