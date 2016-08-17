@@ -67,6 +67,7 @@ class Configuration implements ConfigurationInterface
         $params = $http->children();
         $params->scalarNode('client')->end();
         $params->scalarNode('message_factory')->end();
+        $params->scalarNode('stream_factory')->end();
         $params->end();
         $http->end();
 

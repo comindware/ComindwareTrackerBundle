@@ -34,7 +34,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
     /**
      * Configures the passed container according to the merged configuration.
      *
-     * @param array            $mergedConfig
+     * @param array $mergedConfig
      * @param ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
@@ -65,6 +65,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
             $token = $config['token'];
             $httpClient = null;
             $messageFactory = null;
+            $streamFactory = null;
 
             if (array_key_exists('client', $config['http'])) {
                 $httpClient = new Reference($config['http']['client']);
@@ -74,7 +75,14 @@ class ComindwareTrackerExtension extends ConfigurableExtension
                 $messageFactory = new Reference($config['http']['message_factory']);
             }
 
-            $service = new Definition(Api::class, [$url, $token, $httpClient, $messageFactory]);
+            if (array_key_exists('stream_factory', $config['http'])) {
+                $streamFactory = new Reference($config['http']['stream_factory']);
+            }
+
+            $service = new Definition(
+                Api::class,
+                [$url, $token, $httpClient, $messageFactory, $streamFactory]
+            );
             $service->setFactory([ConnectionFactory::class, 'create']);
             $container->setDefinition('comindware.tracker.' . $name, $service);
         }
