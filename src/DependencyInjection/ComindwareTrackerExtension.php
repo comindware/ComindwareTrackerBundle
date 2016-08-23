@@ -88,7 +88,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
             $service->setFactory([ConnectionFactory::class, 'create']);
 
             if (array_key_exists('logging', $config)) {
-                if (array_key_exists('service', $config['logger'])) {
+                if (array_key_exists('service', $config['logging'])) {
                     $logger = new Reference($config['logging']['service']);
                     $service->addMethodCall('setLogger', [$logger]);
                 }
