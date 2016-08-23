@@ -34,7 +34,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
     /**
      * Configures the passed container according to the merged configuration.
      *
-     * @param array $mergedConfig
+     * @param array            $mergedConfig
      * @param ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
@@ -88,8 +88,10 @@ class ComindwareTrackerExtension extends ConfigurableExtension
             $service->setFactory([ConnectionFactory::class, 'create']);
 
             if (array_key_exists('logging', $config)) {
-                $logger = new Reference($config['logging']['service']);
-                $service->addMethodCall('setLogger', [$logger]);
+                if (array_key_exists('service', $config['logger'])) {
+                    $logger = new Reference($config['logging']['service']);
+                    $service->addMethodCall('setLogger', [$logger]);
+                }
             }
 
             $container->setDefinition('comindware.tracker.' . $name, $service);
