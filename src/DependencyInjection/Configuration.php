@@ -77,7 +77,7 @@ class Configuration implements ConfigurationInterface
         $http->end();
 
         $logging = $connection->arrayNode('logging');
-        $params = $http->children();
+        $params = $logging->children();
         $params->scalarNode('service')->end();
         $params->end();
         $logging->end();
