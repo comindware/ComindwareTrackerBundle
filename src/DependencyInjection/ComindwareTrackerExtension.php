@@ -38,6 +38,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
      * @param ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
@@ -53,6 +54,7 @@ class ComindwareTrackerExtension extends ConfigurableExtension
      * @param array            $configs
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      */
     private function createConnections(ContainerBuilder $container, array $configs)
     {
@@ -84,6 +86,12 @@ class ComindwareTrackerExtension extends ConfigurableExtension
                 [$url, $token, $httpClient, $messageFactory, $streamFactory]
             );
             $service->setFactory([ConnectionFactory::class, 'create']);
+
+            if (array_key_exists('logging', $config)) {
+                $logger = new Reference($config['logging']['service']);
+                $service->addMethodCall('setLogger', [$logger]);
+            }
+
             $container->setDefinition('comindware.tracker.' . $name, $service);
         }
     }

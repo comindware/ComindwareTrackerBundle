@@ -56,6 +56,11 @@ class Configuration implements ConfigurationInterface
         $children->end();
     }
 
+    /**
+     * Add single connection node.
+     *
+     * @param ArrayNodeDefinition $root
+     */
     private function addConnectionNode(ArrayNodeDefinition $root)
     {
         $connection = $root->children();
@@ -70,6 +75,12 @@ class Configuration implements ConfigurationInterface
         $params->scalarNode('stream_factory')->end();
         $params->end();
         $http->end();
+
+        $logging = $connection->arrayNode('logging');
+        $params = $http->children();
+        $params->scalarNode('logger')->isRequired()->end();
+        $params->end();
+        $logging->end();
 
         $connection->end();
     }
